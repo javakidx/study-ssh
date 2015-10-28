@@ -1,0 +1,25 @@
+package idv.jk.readinglist.conditions;
+
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
+public class JdbcTemplateCondition implements Condition
+{
+	@Override
+	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata)
+	{
+		try
+		{
+			//This is to say that JdbcTemplate must be available on the classpath.
+			context.getClassLoader().loadClass("org.springframework.jdbc.core.JdbcTemplate");
+			return true;
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return false;
+	}
+
+}
