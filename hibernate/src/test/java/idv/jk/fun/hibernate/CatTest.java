@@ -20,10 +20,17 @@ public class CatTest
 			mother.setName("Mary");
 			mother.setDescription("The Mommy cat");
 			mother.setCreateDate(new Date());
+
+			Cat catKid1 = new Cat();
+            catKid1.setMother(mother);
+            catKid1.setName("Jonny");
+            catKid1.setDescription("Hi, I am John");
+            catKid1.setCreateDate(new Date());
 			
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction tx = session.beginTransaction();
 			session.persist(mother);
+            session.persist(catKid1);
 			tx.commit();
 			session.close();
 		} catch (Exception e)

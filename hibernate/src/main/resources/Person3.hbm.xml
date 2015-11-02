@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="idv.jk.fun.hibernate.entity">
+    <class name="Person3" table="tb_person3">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" />
+        <bag name="emails" cascade="all" lazy="false" where="email like '%@%'" order-by="email">
+            <key column="email_id"></key>
+            <!-- 會自動產生tb_person3_emails資料表，包含email_id和email兩個欄位-->
+            <element type="string" column="email"></element>
+        </bag>
+    </class>
+</hibernate-mapping>
