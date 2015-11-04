@@ -13,7 +13,7 @@ import idv.jk.readinglist.entity.Book;
 import idv.jk.readinglist.repos.ReadingListRepository;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/readingList")
 public class ReadingListController
 {
 	private ReadingListRepository readingListRepository;
