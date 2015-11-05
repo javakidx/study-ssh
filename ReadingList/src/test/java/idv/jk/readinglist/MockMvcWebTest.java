@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -16,9 +15,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import idv.jk.readinglist.entity.Book;
+import idv.jk.readinglist.entity.Reader;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+//import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
 
 /**
  *  A unit test for Spring Boot application.
@@ -38,8 +39,32 @@ public class MockMvcWebTest
 	@Before
 	public void setupMockMvc()
 	{
-		mockMvc = MockMvcBuilders.webAppContextSetup(webContext)
-					.apply(SpringSecurity()).build();
+		//mockMvc = MockMvcBuilders.webAppContextSetup(webContext).apply( springSecurity()).build(); //comment for the compilation error
+		mockMvc = MockMvcBuilders.webAppContextSetup(webContext).build();
+	}
+	
+	@Test
+	public void homePageUnauthenticatedUser() throws Exception
+	{
+		mockMvc.perform(get("/"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(header().string("Location", "http://localhost/login"));
+	}
+	
+	@Test
+	//@WithUseDetails("craig") //trying to import the package
+	public void homePageAuthenticatedUser() throws Exception
+	{
+		Reader expectedReader = new Reader();
+		expectedReader.setUsername("craig");
+		expectedReader.setPassword("password");
+		expectedReader.setFullname("Craig Walls");
+		
+		mockMvc.perform(get("/"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("readingList"))
+			.andExpect(model().attribute("reader", samePropertyValuesAs(expectedReader)))
+			.andExpect(model().attribute("books", hasSize(0)));
 	}
 	
 	@Test
