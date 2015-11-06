@@ -19,7 +19,7 @@ import idv.jk.readinglist.entity.Reader;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-//import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.*;
 
 /**
  *  A unit test for Spring Boot application.
@@ -39,8 +39,8 @@ public class MockMvcWebTest
 	@Before
 	public void setupMockMvc()
 	{
-		//mockMvc = MockMvcBuilders.webAppContextSetup(webContext).apply( springSecurity()).build(); //comment for the compilation error
-		mockMvc = MockMvcBuilders.webAppContextSetup(webContext).build();
+		mockMvc = MockMvcBuilders.webAppContextSetup(webContext).apply( springSecurity()).build(); //comment for the compilation error
+		//mockMvc = MockMvcBuilders.webAppContextSetup(webContext).build();
 	}
 	
 	@Test
