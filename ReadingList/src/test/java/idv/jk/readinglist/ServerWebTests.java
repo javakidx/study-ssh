@@ -40,7 +40,7 @@ public class ServerWebTests
 	@Test
 	public void addBookToEmptyList()
 	{
-		String baseUrl = "http://localhost:" + port + "/readingList/uncle";
+		String baseUrl = "http://localhost:" + port + "/uncle";
 		browser.get(baseUrl);
 		
 		assertEquals("You have no books in your book list", browser.findElementByTagName("div").getText());
@@ -51,7 +51,7 @@ public class ServerWebTests
 		browser.findElementByTagName("form").submit();
 		
 		WebElement dl = browser.findElementByCssSelector("dt.bookHeadline");
-		assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN: 1234567890)", dl.getText());
+		assertEquals("BOOK TITLE by BOOK AUTHOR (ISBN:1234567890)", dl.getText());
 		WebElement dt = browser.findElementByCssSelector("dd.bookDescription");
 		assertEquals("DESCRIPTION",  dt.getText());;
 	}
