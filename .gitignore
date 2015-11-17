@@ -21,4 +21,6 @@ target/
 .gradle
 bin/
 tmp/
+hibernate/.idea/
+hibernate/target/
 .DS_Store
