@@ -10,7 +10,7 @@ public class AopServiceImpl implements AopService
 	
 	public void withAop() throws Exception
 	{
-		System.out.printf("執行AOP的函式，name：%s", name);
+		System.out.printf("執行AOP的函式，name：%s%n", name);
 		
 		if(name.trim().length() == 0)
 		{
