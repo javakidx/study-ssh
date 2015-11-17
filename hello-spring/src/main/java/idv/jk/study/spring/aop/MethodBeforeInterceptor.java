@@ -11,7 +11,7 @@ public class MethodBeforeInterceptor implements MethodBeforeAdvice
 
 	public void before(Method method, Object[] args, Object instance) throws Throwable
 	{
-		System.out.printf("執行方法：%s", method.getName());
+		System.out.printf("執行方法：%s%n", method.getName());
 		
 		if (instance instanceof AopServiceImpl)
 		{
